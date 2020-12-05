@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.github.dhaval2404.itunesplayer.ui.splash.SplashViewModel" />
     </data>
 
     <FrameLayout
@@ -16,8 +19,8 @@
             android:id="@+id/animation_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="48dp"
             android:layout_gravity="center"
+            android:layout_margin="48dp"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/speaker_music_sound" />
