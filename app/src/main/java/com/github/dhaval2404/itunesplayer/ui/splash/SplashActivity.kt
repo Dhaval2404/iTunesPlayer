@@ -1,10 +1,12 @@
 package com.github.dhaval2404.itunesplayer.ui.splash
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.github.dhaval2404.itunesplayer.R
 import com.github.dhaval2404.itunesplayer.databinding.ActivitySplashBinding
 import com.github.dhaval2404.itunesplayer.ui.base.BaseActivity
+import com.github.dhaval2404.itunesplayer.ui.song.SongActivity
 
 /**
  * Splash Screen
@@ -25,7 +27,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
         super.onCreate(savedInstanceState)
         mViewDataBinding.viewModel = mViewModel
 
-        setObserver()
+        initObserver()
 
         // Perform Initialization
         mViewModel.preProcessing()
@@ -34,13 +36,18 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     /**
      * Listen to ViewModel changes
      */
-    private fun setObserver() {
+    private fun initObserver() {
         mViewModel.syncLiveData.observe(this, {
             startSongActivity()
         })
     }
 
     private fun startSongActivity() {
+        // Start Song Activity
+        val intent = Intent(this, SongActivity::class.java)
+        startActivity(intent)
 
+        // Finish Splash Activity. It should not open on back press
+        finish()
     }
 }
