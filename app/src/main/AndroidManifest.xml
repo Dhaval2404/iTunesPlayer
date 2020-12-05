@@ -3,13 +3,13 @@
     package="com.github.dhaval2404.itunesplayer">
 
     <application
+        android:name=".ITunesPlayerApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:name=".ITunesPlayerApp"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ITunesPlayer">
+        android:theme="@style/Theme.ITunesPlayer.NoActionBar">
 
         <activity
             android:name=".ui.splash.SplashActivity"
@@ -33,6 +33,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
+
+        <activity
+            android:name=".ui.song.SongActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 
