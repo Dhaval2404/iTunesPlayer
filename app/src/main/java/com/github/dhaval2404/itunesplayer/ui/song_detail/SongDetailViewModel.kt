@@ -55,6 +55,13 @@ class SongDetailViewModel : BaseViewModel() {
 
     fun getCurrentDuration(): Int = mMediaPlayer?.currentPosition ?: 0
 
+    fun setProgress(progress: Int) {
+        if (mIsMediaPlayerPrepared) {
+            val seekTo = (progress * getDuration()) / 100
+            mMediaPlayer?.seekTo(seekTo)
+        }
+    }
+
     fun playNext() {
         if (mPlaybackList.isEmpty()) return
 
@@ -108,7 +115,7 @@ class SongDetailViewModel : BaseViewModel() {
 
         mMediaPlayer = MediaPlayer()
         mMediaPlayer?.setOnPreparedListener {
-            mIsMediaPlayerPrepared = false
+            mIsMediaPlayerPrepared = true
             playOrPause(true)
         }
 

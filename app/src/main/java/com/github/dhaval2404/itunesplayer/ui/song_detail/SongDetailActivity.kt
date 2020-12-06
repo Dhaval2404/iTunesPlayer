@@ -1,6 +1,7 @@
 package com.github.dhaval2404.itunesplayer.ui.song_detail
 
 import android.os.Bundle
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.github.dhaval2404.itunesplayer.R
@@ -31,6 +32,8 @@ class SongDetailActivity : BaseActivity<ActivitySongDetailBinding, SongDetailVie
 
         initToolbar()
 
+        initUI()
+
         handleExtras()
     }
 
@@ -41,6 +44,22 @@ class SongDetailActivity : BaseActivity<ActivitySongDetailBinding, SongDetailVie
         val toolbar = mViewDataBinding.appbarLayout.toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    /**
+     * Setup UI
+     */
+    private fun initUI() {
+        mViewDataBinding.progressbar.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) mViewModel.setProgress(progress)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
     }
 
     /**
