@@ -2,6 +2,7 @@ package com.github.dhaval2404.itunesplayer.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.github.dhaval2404.itunesplayer.R
 import com.github.dhaval2404.itunesplayer.databinding.ActivitySplashBinding
@@ -25,6 +26,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Apply Binding
         mViewDataBinding.viewModel = mViewModel
 
         initObserver()
@@ -37,11 +40,33 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
      * Listen to ViewModel changes
      */
     private fun initObserver() {
-        mViewModel.syncLiveData.observe(this, {
-            startSongActivity()
-        })
+        // Observe Sync Complete
+        mViewModel.syncLiveData.observe(
+            this,
+            { _ ->
+                startSongActivity()
+            }
+        )
+
+        // Observe Error
+        mViewModel.errorLiveData.observe(
+            this,
+            { error ->
+                showErrorMessage(error)
+            }
+        )
     }
 
+    private fun showErrorMessage(message: String) {
+        AlertDialog.Builder(this)
+            .setMessage(message)
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
+    }
+
+    /**
+     * Navigate to Song Listing Screen
+     */
     private fun startSongActivity() {
         // Start Song Activity
         val intent = Intent(this, SongActivity::class.java)
