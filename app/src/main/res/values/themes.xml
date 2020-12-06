@@ -27,8 +27,16 @@
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
-    <style name="Theme.ITunesPlayer.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <!-- Main application theme. -->
+    <style name="Theme.ITunesPlayer.NoActionBar.Main">
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="Theme.ITunesPlayer.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
 
     <style name="Theme.ITunesPlayer.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="Theme.ITunesPlayer.Toolbar.Text" parent="TextAppearance.AppCompat.Title">
+        <item name="android:fontFamily">@font/opensans_bold</item>
+    </style>
 </resources>
