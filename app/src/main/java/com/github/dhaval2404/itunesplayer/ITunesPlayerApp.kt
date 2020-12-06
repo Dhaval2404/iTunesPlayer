@@ -1,9 +1,12 @@
 package com.github.dhaval2404.itunesplayer
 
 import android.app.Application
+import com.github.dhaval2404.itunesplayer.di.appComponent
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger.addLogAdapter
 import com.orhanobut.logger.PrettyFormatStrategy
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 /**
  * Application Instance
@@ -18,6 +21,23 @@ class ITunesPlayerApp : Application() {
         super.onCreate()
 
         initLogger()
+
+        initKoin()
+    }
+
+    /**
+     * Initialize Service Locator
+     */
+    private fun initKoin() {
+        // start Koin!
+        startKoin {
+
+            // Android context
+            androidContext(this@ITunesPlayerApp)
+
+            // modules
+            modules(appComponent)
+        }
     }
 
     /**
