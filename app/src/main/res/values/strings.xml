@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">iTunes Player</string>
+    <string name="description_song_next">Play Next Song</string>
+    <string name="description_song_previous">Play Previous Song</string>
+    <string name="description_song_progress">Song Progress</string>
+    <string name="description_play_pause">Play or Pause</string>
+    <string name="error_missing_song_info">Missing songs info</string>
 </resources>

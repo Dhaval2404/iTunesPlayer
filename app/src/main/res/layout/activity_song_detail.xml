@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.github.dhaval2404.itunesplayer.ui.song_detail.SongDetailViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/appbar_layout"
+            layout="@layout/content_appbar" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="48dp"
+                app:cardCornerRadius="30dp"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintBottom_toTopOf="@id/txt_title"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey_200"
+                    android:scaleType="centerCrop"
+                    app:srcImage="@{viewModel.currentSong.cover}" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:gravity="center"
+                android:text="@{viewModel.currentSong.name}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/txt_sub_title"
+                tools:text="This is a title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_sub_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="48dp"
+                android:gravity="center"
+                android:text="@{viewModel.currentSong.artist}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                app:layout_constraintBottom_toTopOf="@id/progressbar"
+                tools:text="This is a subtitle" />
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="64dp"
+                android:contentDescription="@string/description_song_progress"
+                android:indeterminate="false"
+                android:progress="@{viewModel.playbackProgress}"
+                app:layout_constraintBottom_toTopOf="@id/btn_play_pause" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:padding="4dp"
+                android:text="@{viewModel.playbackTime}"
+                app:fontFamily="@font/opensans_semibold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progressbar"
+                tools:text="00:00" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:padding="4dp"
+                android:text="@{viewModel.playbackDuration}"
+                app:duration="@{viewModel.currentSong.duration}"
+                app:fontFamily="@font/opensans_semibold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progressbar"
+                tools:text="00:30" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="48dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/description_song_previous"
+                android:onClick="@{()->viewModel.playPrevious()}"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_skip_previous_white_24dp"
+                android:tint="@color/grey_400"
+                app:layout_constraintBottom_toBottomOf="@id/btn_play_pause"
+                app:layout_constraintEnd_toStartOf="@id/btn_play_pause"
+                app:layout_constraintTop_toTopOf="@id/btn_play_pause" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_play_pause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:contentDescription="@string/description_play_pause"
+                android:onClick="@{()->viewModel.playOrPause()}"
+                app:fabCustomSize="72dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:maxImageSize="36dp"
+                app:srcPlayPause="@{viewModel.playbackStatus}"
+                tools:src="@drawable/baseline_play_arrow_white_24dp" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="48dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/description_song_next"
+                android:onClick="@{()->viewModel.playNext()}"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_skip_next_white_24dp"
+                android:tint="@color/grey_400"
+                app:layout_constraintBottom_toBottomOf="@id/btn_play_pause"
+                app:layout_constraintStart_toEndOf="@id/btn_play_pause"
+                app:layout_constraintTop_toTopOf="@id/btn_play_pause" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
