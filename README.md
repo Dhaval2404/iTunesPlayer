@@ -31,7 +31,7 @@
 - Architecture
   - MVVM Architecture (View - DataBinding - ViewModel - Model)
   - Repository pattern
-- [Retrofit2 & OkHttp3](https://github.com/square/retrofit) - construct the REST APIs and paging network data.
+- [Retrofit2 & OkHttp3](https://github.com/square/retrofit) - construct the REST APIs and Fetch network data.
 - [Chucker](https://github.com/ChuckerTeam/chucker) - HTTP inspector.
 - [SimpleXML](http://simple.sourceforge.net/) - A XML library for Java.
 - [Coil](https://github.com/coil-kt/coil) - loading images.
@@ -47,7 +47,7 @@
 
 * Open API</br>
 	Provider: iTunes Store - Top Songs</br>
-	Source: http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topsongs/limit=20/xml
+	Source: http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topsongs/xml
 
 ### Let us know!
 
